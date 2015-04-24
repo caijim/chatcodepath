@@ -6,43 +6,43 @@
 	<dict>
 		<key>Pods-AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Bolts.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-SVProgressHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4C6878A0ABC280244A3F1920</key>
+		<key>4D31380D0C3FC067560428DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>51A0BEA8D4F566AD4A07A484</key>
+		<key>89E0AB9CC3EBCB43A0D3DDE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>793BD94E784DDB6D737A5034</key>
+		<key>A56E0ADC5D98B996996D4E07</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C980A1CB27C8EC55FB55E68D</key>
+		<key>EDC01045DFE3BD687E0CBA00</key>
 		<dict>
 			<key>primary</key>
 			<true/>

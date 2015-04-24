@@ -31,10 +31,15 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as MessageTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageTableViewCell
         var obj = messages[indexPath.row]
         println(obj["text"])
         cell.message.text = obj["text"] as? String
+        if let username = obj["user"] as? String {
+            cell.user.text = username
+        } else {
+            cell.user.text = "[no username]"
+        }
         return cell
     }
     
@@ -46,9 +51,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func onTimer() {
         // Add code to be run periodically
         var query = PFQuery(className:"Message")
+        query.orderByDescending("createdAt")
+        // query.includeKey("user")
         //query.whereKey("playerName", equalTo:"Sean Plott")
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 // The find succeeded.
                 // Do something with the found objects
@@ -61,7 +68,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             } else {
                 // Log details of the failure
-                println("Error: \(error) \(error.userInfo!)")
+                println("Error: \(error) \(error!.userInfo!)")
             }
         }
         
@@ -70,9 +77,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func sendMessage(sender: AnyObject) {
         var message = PFObject(className: "Message")
         message["text"] = messageField.text
-        message.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+        // message["user"] = PFUser.currentUser()
+        message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if (success) {
                 self.messageField.text = ""
+                self.view.endEditing(true)
             } else {
                 // pop up alert
             }

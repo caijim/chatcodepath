@@ -14,7 +14,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization codep
+        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

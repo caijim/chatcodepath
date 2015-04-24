@@ -66,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25FEED331AE9FD77009750D0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				38E817781AE9EDF500CE119F /* MessageTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		38E817421AE9E26500CE119F = {
 			isa = PBXGroup;
 			children = (
@@ -89,10 +97,10 @@
 		38E8174D1AE9E26500CE119F /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				25FEED331AE9FD77009750D0 /* Views */,
 				38E817751AE9EA0900CE119F /* View Controllers */,
 				38E817501AE9E26500CE119F /* AppDelegate.swift */,
 				38E817541AE9E26500CE119F /* Main.storyboard */,
-				38E817781AE9EDF500CE119F /* MessageTableViewCell.swift */,
 				38E817571AE9E26500CE119F /* Images.xcassets */,
 				38E817591AE9E26500CE119F /* LaunchScreen.xib */,
 				38E8174E1AE9E26500CE119F /* Supporting Files */,

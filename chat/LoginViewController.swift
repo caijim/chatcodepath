@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         //user["phone"] = "415-392-0202"
         
         user.signUpInBackgroundWithBlock {
-            (succeeded: Bool!, error: NSError!) -> Void in
+            (succeeded: Bool, error: NSError?) -> Void in
             if error == nil {
                 println("signupwinning")
             } else {
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginPressed(sender: AnyObject) {
-        PFUser.logInWithUsernameInBackground(emailField.text, password: passwordField.text) { (user: PFUser!, error: NSError!) -> Void in
+        PFUser.logInWithUsernameInBackground(emailField.text, password: passwordField.text) { (user: PFUser?, error: NSError?) -> Void in
             if user != nil {
                 println("winning")
                 self.performSegueWithIdentifier("login", sender: self)
