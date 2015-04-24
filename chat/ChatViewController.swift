@@ -8,10 +8,19 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var messageField: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
+    var messages = [PFObject]()
+    
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "onTimer", userInfo: nil, repeats: true)
+        tableView.delegate = self
+        tableView.dataSource = self
+        
 
         // Do any additional setup after loading the view.
     }
@@ -21,6 +30,54 @@ class ChatViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as MessageTableViewCell
+        var obj = messages[indexPath.row]
+        println(obj["text"])
+        cell.message.text = obj["text"] as? String
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func onTimer() {
+        // Add code to be run periodically
+        var query = PFQuery(className:"Message")
+        //query.whereKey("playerName", equalTo:"Sean Plott")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                // The find succeeded.
+                // Do something with the found objects
+                if let objects = objects as? [PFObject] {
+                    self.messages = objects
+                    self.tableView.reloadData()
+                    //for object in objects {
+                     //   println(object["text"])
+                   // }
+                }
+            } else {
+                // Log details of the failure
+                println("Error: \(error) \(error.userInfo!)")
+            }
+        }
+        
+    }
+    
+    @IBAction func sendMessage(sender: AnyObject) {
+        var message = PFObject(className: "Message")
+        message["text"] = messageField.text
+        message.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+            if (success) {
+                self.messageField.text = ""
+            } else {
+                // pop up alert
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
